@@ -23,17 +23,17 @@ Accessibility is granted. See [Accessibility](#accessibility) and the
 }
 ```
 
-Until this repository is on GitHub, use a local path:
+### rocks.nvim
 
-```lua
-{
-  dir = vim.fn.expand('~/work/macscroll.nvim'),
-  name = 'macscroll.nvim',
-  lazy = false,
-  build = 'make worker',
-  opts = {},
-}
+`macscroll.nvim-scm-1.rockspec` is in the repo for LuaRocks / rocks.nvim.
+Until a versioned rock is on luarocks.org, install from the spec:
+
+```sh
+luarocks --lua-version=5.1 make macscroll.nvim-scm-1.rockspec
 ```
+
+After a publish, `:Rocks install macscroll.nvim` works too. Then build
+the Darwin handler with `:MacscrollBuild` (or `make worker`).
 
 ### vim-plug
 
