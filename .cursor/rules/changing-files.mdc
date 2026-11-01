@@ -1,0 +1,16 @@
+---
+description: Tests, structure, E2E, and security checks required after every code change
+alwaysApply: true
+---
+
+# Changing files
+
+Do not finish a code, script, or test change until all five are done:
+
+1. **Write tests** in `tests/lua/run.lua`, `handler/darwin/Tests/`, and `tests/e2e/e2e.lua`. List new e2e cases in `docs/E2E-TESTPLAN.md`. Bug fixes need a regression that fails without the patch.
+2. **Check spaghetti.** `lua/macscroll/init.lua` is wiring only. Math lives in `dirs.lua` / `view.lua`. Swift policy lives in `MacscrollCore`. The AppKit tap lives in `MacscrollWorker`. Do not put handler sources under `scripts/`.
+3. **Run tests.** `make test` must pass (`make check` + `make e2e` + `make test-nvim`).
+4. **Check vulnerabilities.** No shell strings for `jobstart` / `nvim`. Only `<pid>.sock` names. Quote bash. No secrets in logs.
+5. **Keep docs in sync.** Install/opts → `README.md`. Commands → `doc/macscroll.txt`. E2E → `docs/E2E-TESTPLAN.md`.
+
+Docs-only edits skip tests when runtime behavior did not change.

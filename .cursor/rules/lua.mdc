@@ -1,0 +1,14 @@
+---
+description: Lua plugin conventions
+globs: lua/macscroll/**/*.lua
+alwaysApply: false
+---
+
+# Lua
+
+- Public API stays on `require('macscroll')`. Do not depend on `nvim.setup` modules.
+- `dirs.normalize` owns Option/Ctrl remapping. `view.horiz` / `view.vert` own `leftcol` / `topline`.
+- `E2E_DIR` keeps `listen()` and `ensure_worker()` off unless `{ force = true }`.
+- Build the worker from `handler/darwin` via `swift build`, never `scripts/darwin`.
+- Prefer `vim.system` / `jobstart` argv tables. Socket paths must not contain `..`.
+- After changing scroll math or listen behavior, update `tests/lua/run.lua` and `tests/e2e/e2e.lua`.

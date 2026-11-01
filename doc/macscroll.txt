@@ -1,0 +1,38 @@
+*macscroll.txt*	macOS scroll handler for Neovim
+
+==============================================================================
+INTRO							*macscroll*
+
+macscroll.nvim owns trackpad and mouse-wheel scrolling on macOS. The Darwin
+handler taps every scrollWheel CGEvent when a known terminal is frontmost and
+a Neovim listen socket is live, swallows the event, and RPCs |macscroll.scroll|.
+
+==============================================================================
+SETUP							*macscroll-setup*
+
+>lua
+	require('macscroll').setup({
+	  horiz_step = 6,
+	  vert_step = 3,
+	  auto_worker = true,
+	})
+<
+
+Install with lazy.nvim (`lazy = false`, `build = 'make worker'`) or clone into
+`pack/*/start/`. See the README.
+
+==============================================================================
+COMMANDS						*macscroll-commands*
+
+:MacscrollBuild		Compile handler/darwin into stdpath('data').
+:MacscrollStart		Force-listen and start macscroll-worker.
+:MacscrollStop		Close the RPC socket.
+
+==============================================================================
+HEALTH							*macscroll-health*
+
+:checkhealth macscroll
+
+Allow Accessibility for macscroll-worker or the session tap cannot see events.
+
+vim:tw=78:ts=8:ft=help:norl:

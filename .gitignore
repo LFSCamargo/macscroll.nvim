@@ -1,0 +1,6 @@
+.DS_Store
+*.o
+.doc/tags
+doc/tags
+handler/darwin/.build
+handler/darwin/.swiftpm

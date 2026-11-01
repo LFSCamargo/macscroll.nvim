@@ -1,0 +1,17 @@
+---
+description: Darwin background handler conventions
+globs: handler/darwin/**/*
+alwaysApply: false
+---
+
+# Handler
+
+`handler/darwin` is the background worker, not a shell script.
+
+- Put testable rules in `MacscrollCore` (`SocketName`, `Terminals`, `ScrollMath`, `EventPolicy`, `RPC`).
+- Keep `CGEvent` taps and `Process` RPC in `MacscrollWorker`.
+- Swallow scroll events when a known terminal is frontmost and Neovim is listening. Do not let the TTY filter axes.
+- Read pixel deltas first, then fixed-point, then line ticks. Invert so natural swipe matches Neovim `leftcol` / `topline`.
+- RPC only through `RPC.remoteExpr` → `require('macscroll').scroll`.
+- Reject socket names that are not `<digits>.sock`.
+- Add a `MacscrollCore` unit test for every policy change.
