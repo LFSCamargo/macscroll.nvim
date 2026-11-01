@@ -42,8 +42,9 @@ After any code, script, or test change, complete all five before you stop:
 4. **Check vulnerabilities.** No `jobstart` / `system` via a shell string. Socket
    names must be `<pid>.sock`. Quote bash variables. Prefer argv arrays. Do not
    log secrets.
-5. **Keep docs in sync.** Install / opts → `README.md`. Commands →
-   `doc/macscroll.txt`. E2E cases → `docs/E2E-TESTPLAN.md`.
+5. **Keep docs in sync.** Install / opts / Accessibility → `README.md` and
+   `docs/TUTORIAL.md`. Commands → `doc/macscroll.txt`. E2E cases →
+   `docs/E2E-TESTPLAN.md`.
 
 Docs-only edits skip tests when runtime behavior did not change. Still scan
 for secrets.
