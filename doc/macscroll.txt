@@ -19,7 +19,25 @@ SETUP							*macscroll-setup*
 <
 
 Install with lazy.nvim (`lazy = false`, `build = 'make worker'`) or clone into
-`pack/*/start/`. See the README.
+`pack/*/start/`. See the README and |macscroll-accessibility|.
+
+==============================================================================
+ACCESSIBILITY					*macscroll-accessibility*
+
+The Darwin worker taps every scrollWheel CGEvent. macOS delivers that tap
+only if **macscroll-worker** is allowed under System Settings → Privacy &
+Security → Accessibility.
+
+    1. Build/start the worker (`:MacscrollBuild`, `:MacscrollStart`).
+    2. Enable macscroll-worker in Accessibility. If it is missing, add
+       `stdpath('data')/macscroll/macscroll-worker` (usually
+       ~/.local/share/nvim/macscroll/macscroll-worker).
+    3. Restart the worker (`:MacscrollStop` / `:MacscrollStart`). A tap
+       that failed at launch does not start when you tick the checkbox.
+
+Grant the worker binary, not nvim or swift. Rebuilding can require
+toggling the row again. Without this grant the TTY still filters wheels.
+See README and docs/TUTORIAL.md.
 
 ==============================================================================
 COMMANDS						*macscroll-commands*
@@ -33,6 +51,7 @@ HEALTH							*macscroll-health*
 
 :checkhealth macscroll
 
-Allow Accessibility for macscroll-worker or the session tap cannot see events.
+Allow Accessibility for macscroll-worker or the session tap cannot see
+events. See |macscroll-accessibility|.
 
 vim:tw=78:ts=8:ft=help:norl:
